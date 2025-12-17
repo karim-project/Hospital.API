@@ -1,0 +1,32 @@
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Hospital.Data.Models
+{
+    public class Doctor
+    {
+        public Guid Id { get; set; }
+       
+        public string FullName { get; set; } = default!;
+       
+        public string? Phone { get; set; } 
+        public string? Email { get; set; }
+        public string? Img { get; set; }
+
+      
+        public ICollection<DoctorSpecialty> DoctorSpecialties { get; set; } = new List<DoctorSpecialty>();
+
+        public ICollection<Appointment> Appointments { get; set; } = new List<Appointment>();
+        public ICollection<Visit> Visits { get; set; } = new List<Visit>();
+
+        public Guid? DepartmentId { get; set; }
+
+        public Department? Department { get; set; }
+
+        public Guid? SpecialtyId { get; set; }
+        public Specialty? Specialty { get; set; }
+
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+        public bool IsDeleted { get; set; }
+    }
+}

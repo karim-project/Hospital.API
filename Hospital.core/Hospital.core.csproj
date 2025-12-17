@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="14.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.17" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hospital.Data\Hospital.Data.csproj" />
+    <ProjectReference Include="..\Hospital.Infrustructure\Hospital.Infrustructure.csproj" />
+    <ProjectReference Include="..\Hospital.Service\Hospital.Service.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Features\Doctors\Commands\Handelrs\" />
+    <Folder Include="Features\Doctors\Commands\Models\" />
+    <Folder Include="Features\Doctors\Commands\" />
+    <Folder Include="Features\Doctors\Commands\Validation\" />
+    <Folder Include="Mapping\" />
+  </ItemGroup>
+
+</Project>
