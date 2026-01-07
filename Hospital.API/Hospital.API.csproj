@@ -26,4 +26,8 @@
     <ProjectReference Include="..\Hospital.core\Hospital.core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\DoctorImg\" />
+  </ItemGroup>
+
 </Project>

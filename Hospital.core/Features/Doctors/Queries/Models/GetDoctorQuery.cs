@@ -1,4 +1,5 @@
-﻿using Hospital.core.Features.Doctors.Queries.Response;
+﻿using Hospital.core.Bases;
+using Hospital.core.Features.Doctors.Queries.Response;
 using Hospital.Data.Models;
 using MediatR;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.core.Features.Doctors.Queries.Models
 {
-    public class GetDoctorQuery : IRequest<List<DoctorResponse>>
+    public class GetDoctorQuery : IRequest<Response<List<DoctorResponse>>>
     {
     }
 }

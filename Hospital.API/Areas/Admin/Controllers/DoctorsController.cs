@@ -22,10 +22,16 @@ namespace Hospital.API.Areas.Admin.Controllers
     public class DoctorsController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IRepository<Doctor> _doctorRepository;
+        private readonly ApplicationDBcontext _context;
+        private readonly ILogger<DoctorsController> _logger;
 
-        public DoctorsController(IMediator mediator )
+        public DoctorsController(IMediator mediator ,IRepository<Doctor> doctorRepository,ApplicationDBcontext context, ILogger<DoctorsController> logger)
         {
             _mediator = mediator;
+            _doctorRepository = doctorRepository;
+            _context = context;
+           _logger = logger;
         }
 
         [HttpGet("GetAll")]
@@ -44,9 +50,24 @@ namespace Hospital.API.Areas.Admin.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<IActionResult> Create(CreateDoctorCommand command)
+        public async Task<IActionResult> Create([FromForm]AddDoctorCoomand coomand , CancellationToken cancellationToken)
         {
-            var response = await _mediator.Send(command);
+            var response = await _mediator.Send(coomand);
+
+            return Ok(response);
+        }
+        [HttpPut("Edit")]
+        public async Task<IActionResult> Edit([FromForm] EditDoctorCoomand coomand, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(coomand);
+
+            return Ok(response);
+        }
+        [HttpDelete("Delete")]
+        public async Task<IActionResult> Delete([FromForm]Guid id, CancellationToken cancellationToken)
+        {
+            var response = await _mediator.Send(new DeleteDoctorCoomand(id));
+
             return Ok(response);
         }
 

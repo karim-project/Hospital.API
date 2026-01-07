@@ -15,10 +15,6 @@ namespace Hospital.core.Mapping.Doctors
             CreateMap<Doctor, DoctorResponse>()
                     .ForMember(d => d.DepartmentName, o => o.MapFrom(d => d.Department!.Name))
                     .ForMember(d => d.SpecialtyName, o => o.MapFrom(d => d.Specialty!.Name));
-
-
-            AddDoctorCommandMapping();
-
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Hospital.core.Bases;
 using Hospital.core.Features.Doctors.Queries.Models;
 using Hospital.core.Features.Doctors.Queries.Response;
 using Hospital.Infrustructure.Data;
@@ -12,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Hospital.core.Features.Doctors.Queries.Handelrs
 {
-    public class DoctorHandler : IRequestHandler<GetDoctorQuery, List<DoctorResponse>>,
+    public class DoctorHandler : ResponseHandler , IRequestHandler<GetDoctorQuery,Response< List<DoctorResponse>>>,
                                   IRequestHandler<GetDoctorByIDQuery,DoctorResponse>
     {
         private readonly ApplicationDBcontext _context;
@@ -26,13 +27,7 @@ namespace Hospital.core.Features.Doctors.Queries.Handelrs
             _mapper = mapper;
         }
 
-        public async Task<List<DoctorResponse>> Handle(GetDoctorQuery request, CancellationToken cancellationToken)
-        {
-            var doctors = await _DoctorepositoryService.GetAsync(includes: [d => d.Department!, d => d.Specialty!], tracked: false, cancellationToken: cancellationToken);
-            var doctorMapper = _mapper.Map<List<DoctorResponse>>(doctors);
-
-            return doctorMapper;
-        }
+        
 
         public async Task<DoctorResponse> Handle(GetDoctorByIDQuery request, CancellationToken cancellationToken)
         {
@@ -45,6 +40,14 @@ namespace Hospital.core.Features.Doctors.Queries.Handelrs
             return result;
             
 
+        }
+
+        async Task<Response<List<DoctorResponse>>> IRequestHandler<GetDoctorQuery, Response<List<DoctorResponse>>>.Handle(GetDoctorQuery request, CancellationToken cancellationToken)
+        {
+            var doctors = await _DoctorepositoryService.GetAsync(includes: [d => d.Department!, d => d.Specialty!], tracked: false, cancellationToken: cancellationToken);
+            var doctorMapper = _mapper.Map<List<DoctorResponse>>(doctors);
+
+            return Success(doctorMapper);
         }
     }
 }

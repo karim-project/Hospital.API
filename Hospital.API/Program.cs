@@ -2,6 +2,7 @@
 using Hospital.core;
 using Hospital.core.Features.Doctors.Queries.Handelrs;
 using Hospital.core.Features.Doctors.Queries.Models;
+using Hospital.core.NewFolder;
 using Hospital.Data.Models;
 using Hospital.Infrustructure;
 using Hospital.Infrustructure.Data;
@@ -50,6 +51,7 @@ namespace Hospital.API
                 app.MapOpenApi();
                 app.MapScalarApiReference();
             }
+            app.UseMiddleware<ErrorHandlerMiddleware>();
 
             app.UseHttpsRedirection();
 
